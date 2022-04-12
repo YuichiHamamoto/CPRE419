@@ -8,7 +8,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
 
 @SuppressWarnings("serial")
-public class WordCountFlink {
+public class Bigram {
 
   public static void main(String[] args) throws Exception {
     final ParameterTool params = ParameterTool.fromArgs(args);
@@ -74,13 +74,25 @@ public class WordCountFlink {
 
     public void flatMap(String value, Collector<Tuple2<String, Integer>> out) {
       // normalize and split the line
-      String[] tokens = value.toLowerCase().split("\\W+");
-
-      // emit the pairs
-      for (String token : tokens) {
-        if (token.length() > 0) {
-          out.collect(new Tuple2<String, Integer>(token, 1));
+      value = value.toLowerCase();
+      value = value.replaceAll("[^a-z0-9]", " ");
+      value = value.replaceAll("\\s+", " ");
+      String words[] = value.split(" ");
+      String pre = null;
+      for (String word : words) {
+        if (
+          pre == null ||
+          pre.equals(".") ||
+          word.equals(".") ||
+          pre.equals("") ||
+          word.equals("")
+        ) {} else {
+          String token = pre + " " + word;
+          if (token.length() > 0) {
+            out.collect(new Tuple2<String, Integer>(token, 1));
+          }
         }
+        pre = word;
       }
     }
   }
