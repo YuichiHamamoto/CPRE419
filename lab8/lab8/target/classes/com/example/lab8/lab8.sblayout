@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><application-layout>
+    <component name="trades">
+        <param name="gui:x" value="-271"/>
+        <param name="gui:y" value="-168"/>
+    </component>
+    <component name="isIBM">
+        <param name="gui:x" value="-160"/>
+        <param name="gui:y" value="-168"/>
+    </component>
+    <component name="isLondon">
+        <param name="gui:x" value="-20"/>
+        <param name="gui:y" value="-73"/>
+    </component>
+    <component name="Aggregate">
+        <param name="gui:x" value="-34"/>
+        <param name="gui:y" value="-207"/>
+    </component>
+    <component name="London">
+        <param name="gui:x" value="146"/>
+        <param name="gui:y" value="-99"/>
+    </component>
+    <component name="none_London">
+        <param name="gui:x" value="138"/>
+        <param name="gui:y" value="1"/>
+    </component>
+    <component name="IBM_ave">
+        <param name="gui:x" value="84"/>
+        <param name="gui:y" value="-231"/>
+    </component>
+</application-layout>

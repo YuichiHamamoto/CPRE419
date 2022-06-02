@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modify version="10.4.3_a45545bc0fa864b6dd457e084eb653f6e2004e05">
+    <add>
+        <annotations>
+            <annotation name="hygienic"/>
+        </annotations>
+        <type-metadata>
+            <param name="type" value="module"/>
+            <param name="fully-qualified-name" value="com.example.lab8.lab8"/>
+        </type-metadata>
+        <memory-model-settings/>
+        <dynamic-variables/>
+        <stream name="trades">
+            <schema>
+                <field name="stock_name" type="string"/>
+                <field name="value" type="int"/>
+                <field name="market_location" type="string"/>
+                <field name="time" type="timestamp"/>
+            </schema>
+        </stream>
+        <box name="isIBM" type="filter">
+            <input port="1" stream="trades"/>
+            <output port="1" stream="out:isIBM_1"/>
+            <output port="2" stream="out:isIBM_2"/>
+            <param name="autogen-nomatch-port" value="true"/>
+            <param name="expression.0" value="stock_name==&quot;IBM&quot;"/>
+            <param name="expression.1" value="true"/>
+        </box>
+        <box name="Aggregate" type="aggregate">
+            <input port="1" stream="out:isIBM_1"/>
+            <output port="1" stream="IBM_ave"/>
+            <param name="dimension-name.0" value="Dimension1"/>
+            <param name="dimension-type.0" value="Tuple"/>
+            <param name="dimension-partial.0" value="no"/>
+            <param name="dimension-size.0" value="4"/>
+            <param name="dimension-emit-close-first.0" value="false"/>
+            <param name="output-group-by" value="true"/>
+            <target-list>
+                <expressions>
+                    <include field="average">avg(value)</include>
+                </expressions>
+            </target-list>
+        </box>
+        <box name="isLondon" type="filter">
+            <input port="1" stream="out:isIBM_2"/>
+            <output port="1" stream="London"/>
+            <output port="2" stream="none_London"/>
+            <param name="autogen-nomatch-port" value="true"/>
+            <param name="expression.0" value="market_location==&quot;London&quot;"/>
+            <param name="expression.1" value="true"/>
+        </box>
+        <output-stream name="IBM_ave"/>
+        <output-stream name="London"/>
+        <output-stream name="none_London"/>
+    </add>
+</modify>

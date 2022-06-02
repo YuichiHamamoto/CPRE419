@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbfs:Simulation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:sbfs="http://www.streambase.com/schemas/feedsim/02/SBFS">
+  <SimStreams Name="trades">
+    <ProcessingOptions DataGenerationMethod="Custom"/>
+    <Schema>
+      <Fields Name="stock_name" DataTypeName="string" Description="">
+        <Distribution GenerationMethod="Enumerated" UseRandomSize="true" EnumeratedDistMethod="SpecifiedValues" BlobMinSize="4">
+          <EnumeratedDist weight="1.0" value="IBM"/>
+          <EnumeratedDist weight="1.0" value="Intel"/>
+          <EnumeratedDist weight="1.0" value="Google"/>
+          <EnumeratedDist weight="1.0" value="Microsoft"/>
+        </Distribution>
+        <DataSourceMapping/>
+      </Fields>
+      <Fields Name="value" DataTypeName="int" Description="">
+        <Distribution GenerationMethod="Random" MaxValue="100.0"/>
+        <DataSourceMapping/>
+      </Fields>
+      <Fields Name="market_location" DataTypeName="string" Description="">
+        <Distribution GenerationMethod="Enumerated" UseRandomSize="true" EnumeratedDistMethod="SpecifiedValues" BlobMinSize="4">
+          <EnumeratedDist weight="1.0" value="New York"/>
+          <EnumeratedDist weight="1.0" value="Tokyo"/>
+          <EnumeratedDist weight="1.0" value="London"/>
+          <EnumeratedDist weight="1.0" value="Beijing"/>
+        </Distribution>
+        <DataSourceMapping/>
+      </Fields>
+      <Fields Name="time" DataTypeName="timestamp" Description="">
+        <Distribution GenerationMethod="Random"/>
+        <DataSourceMapping/>
+      </Fields>
+    </Schema>
+  </SimStreams>
+</sbfs:Simulation>
